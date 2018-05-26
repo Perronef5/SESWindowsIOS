@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SESWindows/HomeViewController.swift"
-            timestampString = "546812446.53466"
+            timestampString = "546880301.686983"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
             landmarkName = "scrollViewDidScroll(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SESWindows/HomeViewController.swift"
-            timestampString = "546812446.535081"
+            timestampString = "546880301.687079"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "213"
+            endingLineNumber = "213"
             landmarkName = "segmentedControl(_:didChangeFromSegmentAtIndex:toSegmentAtIndex:)"
             landmarkType = "7">
          </BreakpointContent>

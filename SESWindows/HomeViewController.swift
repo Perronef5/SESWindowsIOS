@@ -94,6 +94,9 @@ extension HomeViewController: SJFluidSegmentedControlDataSource, UIScrollViewDel
         
         
         let slide2:ScreensView = Bundle.main.loadNibNamed("ServicesView", owner: self, options: nil)!.first as! ScreensView
+        slide2.inDetailButtom.layer.borderWidth = 2.0
+        slide2.inDetailButtom.layer.borderColor = UIColorFromRGB(rgbValue: 0x313131).cgColor
+        slide2.inDetailButtom.backgroundColor = UIColor.clear
         
         let slide3:ScreensView = Bundle.main.loadNibNamed("DemoView", owner: self, options: nil)!.first as! ScreensView
         
@@ -101,7 +104,28 @@ extension HomeViewController: SJFluidSegmentedControlDataSource, UIScrollViewDel
         
         
         let slide5:ScreensView = Bundle.main.loadNibNamed("ContactView", owner: self, options: nil)!.first as! ScreensView
-
+        slide5.submitButton.backgroundColor = UIColor.clear
+        slide5.nameTextField.layer.borderWidth = 2.0
+        slide5.nameTextField.layer.borderColor = UIColorFromRGB(rgbValue: 0x313131).cgColor
+        slide5.nameTextField.attributedPlaceholder = NSAttributedString(string: "  Name",
+                                                                  attributes: [NSAttributedStringKey.foregroundColor: UIColorFromRGB(rgbValue: 0x313131).withAlphaComponent(0.7)])
+        slide5.nameTextField.textColor = UIColorFromRGB(rgbValue: 0x313131)
+        slide5.emailTextField.layer.borderWidth = 2.0
+        slide5.emailTextField.layer.borderColor = UIColorFromRGB(rgbValue: 0x313131).cgColor
+        slide5.emailTextField.attributedPlaceholder = NSAttributedString(string: "  Email",
+                                                                        attributes: [NSAttributedStringKey.foregroundColor: UIColorFromRGB(rgbValue: 0x313131).withAlphaComponent(0.7)])
+        slide5.emailTextField.textColor = UIColorFromRGB(rgbValue: 0x313131)
+        slide5.subjectTextField.layer.borderWidth = 2.0
+        slide5.subjectTextField.layer.borderColor = UIColorFromRGB(rgbValue: 0x313131).cgColor
+        slide5.subjectTextField.attributedPlaceholder = NSAttributedString(string: "  Subject",
+                                                                         attributes: [NSAttributedStringKey.foregroundColor: UIColorFromRGB(rgbValue: 0x313131).withAlphaComponent(0.7)])
+        slide5.subjectTextField.textColor = UIColorFromRGB(rgbValue: 0x313131)
+        slide5.messageTextField.layer.borderWidth = 2.0
+        slide5.messageTextField.layer.borderColor = UIColorFromRGB(rgbValue: 0x313131).cgColor
+        slide5.messageTextField.text = "  Message"
+        slide5.messageTextField.textColor = UIColorFromRGB(rgbValue: 0x313131, alpha: 0.7)
+        slide5.submitButton.layer.borderWidth = 2.0
+        slide5.submitButton.layer.borderColor = UIColorFromRGB(rgbValue: 0x313131).cgColor
         
         return[slide1,slide2,slide3, slide4, slide5]
         
