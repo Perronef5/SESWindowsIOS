@@ -23,6 +23,11 @@
 		9D6C27F22096367800898C02 /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D6C27F12096367800898C02 /* AboutView.xib */; };
 		9D6C27F42096368700898C02 /* ContactView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D6C27F32096368700898C02 /* ContactView.xib */; };
 		9D6C27F620977AE900898C02 /* DemoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D6C27F520977AE900898C02 /* DemoView.xib */; };
+		9DBB685020D8053400D2B3A3 /* HomeScreensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBB684F20D8053400D2B3A3 /* HomeScreensView.swift */; };
+		9DBB685220D8055800D2B3A3 /* FirstHomeScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DBB685120D8055800D2B3A3 /* FirstHomeScreen.xib */; };
+		9DBB685420D8056500D2B3A3 /* SecondHomeScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DBB685320D8056500D2B3A3 /* SecondHomeScreen.xib */; };
+		9DBB685620D8058300D2B3A3 /* ThirdHomeScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DBB685520D8058300D2B3A3 /* ThirdHomeScreen.xib */; };
+		9DBB685820D805B000D2B3A3 /* FourthHomeScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DBB685720D805B000D2B3A3 /* FourthHomeScreen.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +70,11 @@
 		9D6C27F12096367800898C02 /* AboutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
 		9D6C27F32096368700898C02 /* ContactView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactView.xib; sourceTree = "<group>"; };
 		9D6C27F520977AE900898C02 /* DemoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DemoView.xib; sourceTree = "<group>"; };
+		9DBB684F20D8053400D2B3A3 /* HomeScreensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreensView.swift; sourceTree = "<group>"; };
+		9DBB685120D8055800D2B3A3 /* FirstHomeScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FirstHomeScreen.xib; sourceTree = "<group>"; };
+		9DBB685320D8056500D2B3A3 /* SecondHomeScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondHomeScreen.xib; sourceTree = "<group>"; };
+		9DBB685520D8058300D2B3A3 /* ThirdHomeScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThirdHomeScreen.xib; sourceTree = "<group>"; };
+		9DBB685720D805B000D2B3A3 /* FourthHomeScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FourthHomeScreen.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +168,7 @@
 		9D6C27EA209635D500898C02 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				9DBB684E20D804D000D2B3A3 /* Home screens */,
 				9D6C27EB2096362800898C02 /* ScreensView.swift */,
 				9D6C27ED2096363800898C02 /* HomeView.xib */,
 				9D6C27EF2096366000898C02 /* ServicesView.xib */,
@@ -166,6 +177,18 @@
 				9D6C27F520977AE900898C02 /* DemoView.xib */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		9DBB684E20D804D000D2B3A3 /* Home screens */ = {
+			isa = PBXGroup;
+			children = (
+				9DBB684F20D8053400D2B3A3 /* HomeScreensView.swift */,
+				9DBB685120D8055800D2B3A3 /* FirstHomeScreen.xib */,
+				9DBB685320D8056500D2B3A3 /* SecondHomeScreen.xib */,
+				9DBB685520D8058300D2B3A3 /* ThirdHomeScreen.xib */,
+				9DBB685720D805B000D2B3A3 /* FourthHomeScreen.xib */,
+			);
+			path = "Home screens";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,13 +298,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DBB685420D8056500D2B3A3 /* SecondHomeScreen.xib in Resources */,
 				9D6C266A2094E28400898C02 /* LaunchScreen.storyboard in Resources */,
 				9D6C27EE2096363800898C02 /* HomeView.xib in Resources */,
 				9D6C27F22096367800898C02 /* AboutView.xib in Resources */,
 				9D6C26672094E28400898C02 /* Assets.xcassets in Resources */,
+				9DBB685620D8058300D2B3A3 /* ThirdHomeScreen.xib in Resources */,
+				9DBB685220D8055800D2B3A3 /* FirstHomeScreen.xib in Resources */,
 				9D6C26652094E28400898C02 /* Main.storyboard in Resources */,
 				9D6C27F620977AE900898C02 /* DemoView.xib in Resources */,
 				9D6C27F42096368700898C02 /* ContactView.xib in Resources */,
+				9DBB685820D805B000D2B3A3 /* FourthHomeScreen.xib in Resources */,
 				9D6C27F02096366000898C02 /* ServicesView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,6 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D6C26622094E28400898C02 /* HomeViewController.swift in Sources */,
+				9DBB685020D8053400D2B3A3 /* HomeScreensView.swift in Sources */,
 				9D6C27E6209632D600898C02 /* SJGradientView.swift in Sources */,
 				9D6C27EC2096362800898C02 /* ScreensView.swift in Sources */,
 				9D6C27E8209632E900898C02 /* UIView+Constraints.swift in Sources */,

@@ -10,11 +10,12 @@ import UIKit
 
 class ScreensView: UIView {
     @IBOutlet weak var submitButton: UIButton!
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var subjectTextField: UITextField!
-    @IBOutlet weak var messageTextField: UITextView!
     @IBOutlet weak var inDetailButtom: UIButton!
+    @IBOutlet weak var homeScrollView: UIScrollView!
+    @IBOutlet weak var phone1Button: UIButton!
+    @IBOutlet weak var phone2Button: UIButton!
+    @IBOutlet weak var emailButton: UIButton!
+    
     
     /*
     // Only override draw() if you perform custom drawing.

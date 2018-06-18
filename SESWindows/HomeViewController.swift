@@ -1,4 +1,5 @@
 import UIKit
+import MessageUI
 
 class HomeViewController: UIViewController {
     
@@ -9,6 +10,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var segmentedControlBGView: UIView!
+    var homeScrollView: UIScrollView!
     
     var userScrolled = false
     var segmentSelected = false
@@ -18,7 +20,8 @@ class HomeViewController: UIViewController {
     var viewAppearedCounter = 0
     var screenWidth: CGFloat = 0.0
     var screenHeight: CGFloat = 0.0
-    
+    var timerCounter: CGFloat = 0.0
+    var firstLoopPassed = false
     
     // MARK: - View Lifecycle
     
@@ -87,16 +90,37 @@ extension HomeViewController: SJFluidSegmentedControlDataSource, UIScrollViewDel
             
     }
     
+    @objc func runTimedCode() {
+        if timerCounter != 0.0 || (!firstLoopPassed) {
+            homeScrollView.setContentOffset(CGPoint(x: screenWidth * timerCounter, y: 0), animated: true)
+        } else {
+            homeScrollView.setContentOffset(CGPoint(x: screenWidth * timerCounter, y: 0), animated: false)
+            firstLoopPassed = false
+        }
+        timerCounter += 1.0
+        if timerCounter == 4.0 {
+            firstLoopPassed = true
+            timerCounter = 0.0
+        }
+    }
+    
     func creatSlides() -> [ScreensView] {
         
         
         let slide1:ScreensView = Bundle.main.loadNibNamed("HomeView", owner: self, options: nil)!.first as! ScreensView
+        self.homeScrollView = slide1.homeScrollView
+        homeScrollView.delegate = self
+        homeScrollView.showsHorizontalScrollIndicator = false
+        let slides:[HomeScreensView] = creatHomeSlides()
+        setUpHomeSlideScrollView(slides)
+        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
         
         
         let slide2:ScreensView = Bundle.main.loadNibNamed("ServicesView", owner: self, options: nil)!.first as! ScreensView
         slide2.inDetailButtom.layer.borderWidth = 2.0
         slide2.inDetailButtom.layer.borderColor = UIColorFromRGB(rgbValue: 0x313131).cgColor
         slide2.inDetailButtom.backgroundColor = UIColor.clear
+        slide2.inDetailButtom.addTarget(self, action: #selector(HomeViewController.inDetailAction(_:)), for: .touchUpInside)
         
         let slide3:ScreensView = Bundle.main.loadNibNamed("DemoView", owner: self, options: nil)!.first as! ScreensView
         
@@ -104,30 +128,29 @@ extension HomeViewController: SJFluidSegmentedControlDataSource, UIScrollViewDel
         
         
         let slide5:ScreensView = Bundle.main.loadNibNamed("ContactView", owner: self, options: nil)!.first as! ScreensView
-        slide5.submitButton.backgroundColor = UIColor.clear
-        slide5.nameTextField.layer.borderWidth = 2.0
-        slide5.nameTextField.layer.borderColor = UIColorFromRGB(rgbValue: 0x313131).cgColor
-        slide5.nameTextField.attributedPlaceholder = NSAttributedString(string: "  Name",
-                                                                  attributes: [NSAttributedStringKey.foregroundColor: UIColorFromRGB(rgbValue: 0x313131).withAlphaComponent(0.7)])
-        slide5.nameTextField.textColor = UIColorFromRGB(rgbValue: 0x313131)
-        slide5.emailTextField.layer.borderWidth = 2.0
-        slide5.emailTextField.layer.borderColor = UIColorFromRGB(rgbValue: 0x313131).cgColor
-        slide5.emailTextField.attributedPlaceholder = NSAttributedString(string: "  Email",
-                                                                        attributes: [NSAttributedStringKey.foregroundColor: UIColorFromRGB(rgbValue: 0x313131).withAlphaComponent(0.7)])
-        slide5.emailTextField.textColor = UIColorFromRGB(rgbValue: 0x313131)
-        slide5.subjectTextField.layer.borderWidth = 2.0
-        slide5.subjectTextField.layer.borderColor = UIColorFromRGB(rgbValue: 0x313131).cgColor
-        slide5.subjectTextField.attributedPlaceholder = NSAttributedString(string: "  Subject",
-                                                                         attributes: [NSAttributedStringKey.foregroundColor: UIColorFromRGB(rgbValue: 0x313131).withAlphaComponent(0.7)])
-        slide5.subjectTextField.textColor = UIColorFromRGB(rgbValue: 0x313131)
-        slide5.messageTextField.layer.borderWidth = 2.0
-        slide5.messageTextField.layer.borderColor = UIColorFromRGB(rgbValue: 0x313131).cgColor
-        slide5.messageTextField.text = "  Message"
-        slide5.messageTextField.textColor = UIColorFromRGB(rgbValue: 0x313131, alpha: 0.7)
         slide5.submitButton.layer.borderWidth = 2.0
         slide5.submitButton.layer.borderColor = UIColorFromRGB(rgbValue: 0x313131).cgColor
+        slide5.submitButton.addTarget(self, action: #selector(HomeViewController.emailAction(_:)), for: .touchUpInside)
+        slide5.emailButton.addTarget(self, action: #selector(HomeViewController.emailAction(_:)), for: .touchUpInside)
+        slide5.phone1Button.addTarget(self, action: #selector(HomeViewController.phoneAction(_:)), for: .touchUpInside)
+        slide5.phone2Button.addTarget(self, action: #selector(HomeViewController.phoneAction(_:)), for: .touchUpInside)
         
         return[slide1,slide2,slide3, slide4, slide5]
+        
+    }
+    
+    func creatHomeSlides() -> [HomeScreensView] {
+        
+        let slide1:HomeScreensView = Bundle.main.loadNibNamed("FirstHomeScreen", owner: self, options: nil)!.first as! HomeScreensView
+        
+        let slide2:HomeScreensView = Bundle.main.loadNibNamed("SecondHomeScreen", owner: self, options: nil)!.first as! HomeScreensView
+        
+        let slide3:HomeScreensView = Bundle.main.loadNibNamed("ThirdHomeScreen", owner: self, options: nil)!.first as! HomeScreensView
+        
+        let slide4:HomeScreensView = Bundle.main.loadNibNamed("FourthHomeScreen", owner: self, options: nil)!.first as! HomeScreensView
+        
+        
+        return[slide1,slide2,slide3, slide4]
         
     }
     
@@ -144,12 +167,27 @@ extension HomeViewController: SJFluidSegmentedControlDataSource, UIScrollViewDel
         
     }
     
+    func setUpHomeSlideScrollView(_ slides: [HomeScreensView]) {
+        
+        //        skyScrollView.frame = CGRect(x: 0, y: 50, width: self.view.frame.width, height: self.view.frame.height - 320)
+        homeScrollView.contentSize = CGSize(width: screenWidth * CGFloat(slides.count) , height: self.view.frame.height)
+        homeScrollView.isPagingEnabled = true
+        
+        for i in 0 ..< slides.count {
+            slides[i].frame = CGRect(x: screenWidth * CGFloat(i), y: 0, width: screenWidth, height: homeScrollView.frame.height)
+            homeScrollView.addSubview(slides[i])
+        }
+        
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if(!segmentSelected && scrollView == skyScrollView) {
-            userScrolled = true
-            let pageIndex = round(scrollView.contentOffset.y/(self.view.frame.height))
-            segmentedControl.setCurrentSegmentIndex(Int(pageIndex), animated: false)
-            userScrolled = false
+        if scrollView == skyScrollView {
+            if(!segmentSelected && scrollView == skyScrollView) {
+                userScrolled = true
+                let pageIndex = round(scrollView.contentOffset.y/(self.view.frame.height))
+                segmentedControl.setCurrentSegmentIndex(Int(pageIndex), animated: false)
+                userScrolled = false
+            }
         }
     }
     
@@ -165,7 +203,7 @@ extension HomeViewController: SJFluidSegmentedControlDataSource, UIScrollViewDel
         } else if index == 1 {
             return "SERVICES".uppercased()
         } else if index == 2 {
-            return "DEMO".uppercased()
+            return "PRODUCTS".uppercased()
         } else if index == 3 {
             return "ABOUT".uppercased()
         } else {
@@ -201,6 +239,10 @@ extension HomeViewController: SJFluidSegmentedControlDataSource, UIScrollViewDel
         case .right:
             return [UIColor.clear]
         }
+    }
+    
+    @objc func inDetailAction(_: AnyObject) {
+
     }
     
 }
@@ -270,5 +312,59 @@ extension HomeViewController: SJFluidSegmentedControlDelegate {
         }
     }
     
+}
+
+extension HomeViewController: MFMailComposeViewControllerDelegate {
+    
+    @objc func emailAction(_: AnyObject) {
+    
+        let mailComposeViewController = configureMailController()
+        if MFMailComposeViewController.canSendMail() {
+            self.present(mailComposeViewController, animated: true, completion: nil)
+        } else {
+            showMailError()
+        }
+        
+    }
+    
+    @objc func phoneAction(_ sender: Any) {
+        
+        switch (sender as! UIButton).tag {
+        case 0:
+            UIApplication.shared.open(URL(string: "tel://7866032313")!, options: [:], completionHandler: nil)
+            break
+        case 1:
+            UIApplication.shared.open(URL(string: "tel://7865532225")!, options: [:], completionHandler: nil)
+            break
+        default:
+            break
+        }
+        
+    }
+    
+   
+    
+    func configureMailController() -> MFMailComposeViewController {
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self
+        
+        mailComposerVC.setToRecipients(["info@solidenvelopessystems.com"])
+        mailComposerVC.setSubject("SES Inquiry:")
+//        mailComposerVC.setMessageBody("How are you doing?", isHTML: false)
+        
+        return mailComposerVC
+    }
+    
+    func showMailError() {
+        let sendMailErrorAlert = UIAlertController(title: "Could not send email", message: "Your device could not send email", preferredStyle: .alert)
+        let dismiss = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        sendMailErrorAlert.addAction(dismiss)
+        self.present(sendMailErrorAlert, animated: true, completion: nil)
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+
 }
 
